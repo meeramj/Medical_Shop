@@ -1,0 +1,138 @@
+{% extends 'afterlogin.html' %}
+{% load static %}
+{% block content %}
+
+  <br>              <!-- Section: Design Block -->
+<section class="text-center">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+        background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+        height: 300px;
+        "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+        margin-top: -100px;
+        background: hsla(0, 0%, 100%, 0.8);
+        backdrop-filter: blur(30px);
+        ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Place your order</h2>
+          <form action="" method="post">
+              {% csrf_token %}
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+
+                  <input type="text" id="form6Example1" class="form-control" placeholder="Enter your first name" name="firstname" required/>
+                  <label class="form-label" for="form6Example1">First name</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="text" id="form6Example2" class="form-control" placeholder="Enter your last name" name="lastname" required />
+                  <label class="form-label" for="form6Example2">Last name</label>
+                </div>
+              </div>
+            </div>
+
+
+              <div class="col">
+                <div class="form-outline mb-4">
+                    <input type="text" id="form6Example3" class="form-control" name="username" placeholder="Enter your username" required/>
+                    <label class="form-label" for="form6Example3">Username</label>
+                </div>
+              </div>
+              <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input type="number" id="form6Example4" class="form-control" placeholder="Enter your phone number" name="phone" required />
+                  <label class="form-label" for="form6Example4">Phone number</label>
+                </div>
+              </div>
+        <!-- Email input -->
+                  <div class="col-md-6 mb-4">
+              <div class="form-outline mb-4">
+                  <input type="email" id="form6Example5" class="form-control" name="email" placeholder="Enter your email id" required />
+                  <label class="form-label" for="form6Example5">Email address</label>
+              </div>
+                      </div>
+              </div>
+
+            <!-- Address line 1  input -->
+            <div class="form-outline mb-4">
+              <textarea class="form-control" id="form6Example6" placeholder="Address line 1" required></textarea>
+              <label class="form-label" for="form6Example6">Address line 1</label>
+            </div>
+
+            <!-- Address line 2  input -->
+            <div class="form-outline mb-4">
+              <textarea class="form-control" id="form6Example7" placeholder="Address line 2" required></textarea>
+              <label class="form-label" for="form6Example7">Address line 2</label> >
+            </div>
+
+            <div class="row">
+               <!-- District -->
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+                  <select id="inputState" class="form-control" name="dist" aria-label="Default select example" onfocus='this.size=4;'onblur='this.size=1;'onchange='this.blur()'>
+                    <option selected>Open this select menu</option>
+                    {% for bar in blinks %}
+                      <option value="{{bar.name}}">{{bar.name}}</option>
+
+                    {% endfor %}
+
+                  </select>
+                  <label for="inputState">District</label>
+                </div>
+              </div>
+
+            <!-- Area -->
+              <div class="col-md-6 mb-4">
+                <div class="form-outline mb-4">
+
+                  <select id="inputArea" class="form-control" name="area" aria-label="Default select example" onfocus='this.size=4;'onblur='this.size=1;'onchange='this.size=1; this.blur();'>
+                    <option selected>Select your Area</option>
+                    {% for ans in alinks %}
+
+                      <option  value="{{ans.name}}">{{ans.name}}</option>
+                    {% endfor %}-->
+
+                  </select>
+
+                  <label for="inputArea">Area</label>
+                </div>
+              </div>
+            </div>
+
+            <!--Medicine -->
+            <div class="col">
+                <div class="form-outline mb-4">
+                  <select multiple required id="inputmed" class="form-control" name="med" aria-label="Default select example" onfocus='this.size=4;'onblur='this.size=1;'onchange='this.size=1; this.blur();'>
+                    <option selected>Select the medicine</option>
+                    {% for par in plinks %}
+                      <option value="{{par.name}}">{{par.name}}</option>
+                    {% endfor %}-->
+                  </select>
+                  <label for="inputmed">Medicine</label>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+              <input class="btn btn-primary btn-block mb-4" type="submit">
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section: Design Block -->
+<br>
+
+{% endblock %}

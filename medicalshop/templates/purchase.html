@@ -1,0 +1,69 @@
+{% load static %}
+<header>
+
+        <a class ="logo" href="{% url 'medshop:allProdCat' %}"><img src="{% static 'img/MJ Medicals logo.png' %}" alt="logimage" width="130px" height="150px"></a>
+
+    <div class="menu_nav">
+        <ul>
+            {% if user.is_authenticated %}
+     	        <li>Hello, {{user.first_name}}</li>
+		        <li><a href="/meduser/logout"><span>Logout</span></a></li>
+            {% endif %}
+            <li><a href=""><span>Appointments</span></a></li>
+            <li><a href="{% url 'medpurchase:medicine' %}"><span>Pharmacy</span></a></li>
+            <li><a href=""><span>Lab Tests</span></a></li>
+            <li><a href=""><span>Health Records</span></a></li>
+            <li><i class="fa fa-user-circle"></i></li>
+        </ul>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+          <a class="nav-link" href="/medshop/">Home</a>
+          </li>
+
+        <li class="nav-item dropdown {% if 'medshop' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            All Products
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+<!--            <li><a class="dropdown-item" href="{% url 'medshop:allProdCat' %}">All Products</a></li>-->
+              {% for cat in links %}
+                <li><a class="dropdown-item" href="{{cat.get_url}}">{{cat.name}}</a></li>
+              {% endfor %}
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown {% if 'medshop' in request.path %} active {% endif %}">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Branches
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for bar in blinks %}
+                <li><a class="dropdown-item" href="https://en.wikipedia.org/wiki/{{bar.name}}">{{bar.name}}</a></li>
+              {% endfor %}
+          </ul>
+        </li>
+        {% if item_count > 0 %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'medcart:cart_detail' %}"><i class="fa fa-shopping-cart"></i>({{item_count}})</a>
+            </li>
+        {% endif %}
+
+      </ul>
+       <form class="d-flex" action="{% url 'medsearch:SearchResult' %}" method="GET">
+           {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+           <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+</nav>

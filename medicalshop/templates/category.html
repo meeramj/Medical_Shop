@@ -1,0 +1,96 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  {% if category %}
+    {{category.name }} - MJ Store
+  {% else %}
+    MJ Medicals - an online medical store
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+{% if category %}
+  <div>
+    <div class="row my_row_class">
+      <div class="mx-auto">
+        <p><a href="{% url 'medshop:allProdCat' %}">Oru Product Collection</a> </p>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="mx_auto">
+  {% if category %}
+    <img class="my_image_padding" src="{{category.img.url}}" alt="{{category.name}}" style="height:120px;width:120px;">
+</div>
+  <br>
+<div>
+  <h1 class="text-center my_title">{{category.name}}</h1>
+<!--  <p class="text-justify">{{category.desc}}</p>-->
+</div>
+  {% else %}
+
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/banner1.png' %}" class="d-block w-100 my_image_padding" alt="Our Products">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/banner2.png' %}" class="d-block w-100 my_image_padding" alt="Our Products">
+    </div>
+   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<br>
+    <div>
+      <h1 class="text-center my_title">Our Products Collection</h1>
+      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    </div>
+  {% endif %}
+<div class="container">
+  <div class="row mx_auto">
+    {% for product in products.object_list %}
+      <div class="my_bottom_margin col-4 col-sm-12 col-md-4 col-lg-4">
+        <div class="card text-center" style="min-width:18rem; min-height:10rem">
+          <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.img.url}}" alt="{{product.name}}" style="height:120px;width:120px;"></a>
+          <div class="card-body" style="height:100px;">
+            <h4>{{product.name}}</h4>
+            <p>{{product.price}}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="mx_auto">
+    {% if products.paginator.num_pages > 1 %}
+
+    <br>
+    <div class="text-center">
+      {% for pg in products.paginator.page_range %}
+        <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+</div>
+  <br>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+

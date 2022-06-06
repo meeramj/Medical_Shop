@@ -1,0 +1,14 @@
+{% load static %}
+<header >
+
+            <a href="{% url 'medshop:allProdCat' %}"><img src="{% static 'img/MJ Medicals logo.png' %}" alt="logimage" width="150px" height="130px"></a>
+
+    <div class="menu_nav">
+        <ul>
+
+            <li><a href=""><span>About Us</span></a></li>
+            <li><a href=""><span>Contact Us</span></a></li>
+            <li><a class="btn btn-success btn-sm" href="{% url 'meduser:login' %}"> Shop Here</a></li>
+        </ul>
+    </div>
+</header>
